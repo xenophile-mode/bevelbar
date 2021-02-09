@@ -1,0 +1,77 @@
+.TH bevelbar-time 1 "2020-02-15" "bevelbar" "User Commands"
+.\" --------------------------------------------------------------------
+.SH NAME
+bevelbar-time \- Time-based driver for bevelbar
+.\" --------------------------------------------------------------------
+.SH SYNOPSIS
+\fBbevelbar-time\fP [\fB\-l\fP \fIpath\fP] [\fB\-r\fP \fIpath\fP]
+[\fB\-s\fP \fIstyle\fP] [\fB\-f\fP \fIformat\fP] [\fB\-n\fP]
+.\" --------------------------------------------------------------------
+.SH DESCRIPTION
+A lighter alternative to a shell script as a driver for \fBbevelbar\fP.
+Sleeps, wakes up at the start of every second, generates output for
+\fBbevelbar\fP. Always displays the same output on all monitors.
+.\" --------------------------------------------------------------------
+.SH OPTIONS
+.TP
+\fB\-l\fP \fIpath\fP
+.TQ
+\fB\-r\fP \fIpath\fP
+If specified, this file will be read and printed verbatim left or right
+of the current time.
+.TP
+\fB\-s\fP \fIstyle\fP
+Use bevelbar style \fIstyle\fP to display the time.
+.TP
+\fB\-f\fP \fIformat\fP
+Format to be used for \fBstrftime\fP(3) to show the current date and
+time.
+.TP
+\fB\-n\fP
+Do not show time, just wake up and show the contents of \fIpath\fP.
+.\" --------------------------------------------------------------------
+.SH EXAMPLES
+Just display date and time:
+.P
+\f(CW
+.nf
+\&    #!/bin/sh
+\&    bevelbar-time | bevelbar
+.fi
+\fP
+.P
+Display more elaborate system status, which is only updated every now
+and then (note the atomic move operation):
+.P
+\f(CW
+.nf
+\&    #!/bin/sh
+\&
+\&    msgfile=$(mktemp)
+\&
+\&    (
+\&        while sleep 120
+\&        do
+\&            new=$(mktemp)
+\&            {
+\&                ... check for new emails or do some other ...
+\&                ... expensive operation ...
+\&            } >"$new"
+\&            mv "$new" "$msgfile"
+\&        done
+\&    ) &
+\&
+\&    bevelbar-time -l "$msgfile" | bevelbar
+.fi
+\fP
+.\" --------------------------------------------------------------------
+.SH LICENSE
+\fBbevelbar\fP is released under the MIT license. See the accompanying
+\fILICENSE\fP file.
+.\" --------------------------------------------------------------------
+.SH HISTORY
+\fBbevelbar\fP was originally written by Peter Hofmann. The project
+was started in January 2016.
+.\" --------------------------------------------------------------------
+.SH "SEE ALSO"
+.BR bevelbar (1)

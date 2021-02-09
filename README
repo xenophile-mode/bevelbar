@@ -1,0 +1,48 @@
+   _                    _ _
+  | |__   _____   _____| | |__   __ _ _ __
+  | '_ \ / _ \ \ / / _ \ | '_ \ / _` | '__|
+  | |_) |  __/\ V /  __/ | |_) | (_| | |
+  |_.__/ \___| \_/ \___|_|_.__/ \__,_|_|
+  https://uninformativ.de/git/bevelbar
+  https://uninformativ.de/bugs.html
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+Draw an X11 status bar with fancy schmancy 1985-ish beveled borders. It
+can display plain text or farbfeld images.
+
+
+Installation
+------------
+
+The following C libraries are required:
+
+    - libx11
+    - libxft
+    - libxrandr
+
+The program expects to be run on a POSIX-ish operating system.
+
+To build the program and install it to /usr/local:
+
+    $ make
+    # make install
+
+
+Running
+-------
+
+The program waits for input on STDIN. Hence, you must combine it with
+some other program which creates said input:
+
+    $ other_program | while sleep 0.1; do bevelbar $args; done
+
+For a brief description of the input format and $args, please refer to
+the manpage or example-run.sh.
+
+bevelbar does not handle changes to your screen layout. When you add,
+remove or rearrange monitors, you have to restart the program. This is
+why I'm using a while-loop in the example above -- you can then simply
+issue a "killall bevelbar".

@@ -1,0 +1,77 @@
+Release history for bevelbar
+
+v20.09  2020-09-26
+  [Added]
+  - Option "-C": This makes bevelbar print its "runtime configuration"
+    and then quit. Currently, this only prints the height of the
+    drawable area, which depends on the font size. If you want to
+    display images, this option can be used to determine an appropriate
+    image size.
+
+v20.05  2020-05-15
+  [Changed]
+  - Default font is now "Misc Fixed" instead of "fixed". It's supposed
+    to be the same font, just with a different name. See also:
+    https://lists.nongnu.org/archive/html/freetype/2017-01/msg00019.html
+  - Makefile: We now use pkg-config for better portability.
+
+v20.03  2020-03-11
+  [Added]
+  - bevelbar-time has been added as an alternative to shell script loops
+    like "while sleep 1; do ...; done | bevelbar", because they can be
+    rather expensive due to all the forks.
+
+v18.06  2018-06-24
+  - This is a maintenance release, due to the project moving away from
+    GitHub. No code changes.
+
+v17.10  2017-10-18
+  [Fixed]
+  - We now use XRRGetMonitors(). In contrast to XRRGetScreenResources(),
+    it does not cause the X server to hang for a few hundred
+    milliseconds.
+
+v17.09  2017-09-16
+  [LICENSING]
+  - The project has been relicensed under the MIT license (more
+    precisely called "Expat License", but everyone calls it "MIT
+    license" these days).
+
+v16.11  2016-11-13
+  [Fixed]
+  - When reading input from STDIN, we now limit the buffer to about 64k.
+    Previously, it was unlimited, meaning faulty scripts could make
+    bevelbar eat all your memory.
+
+  [Added]
+  - Validate magic number of farbfeld images as a quick sanity check.
+
+v16.08  2016-08-20
+  [Added]
+  - Support for displaying farbfeld images.
+
+  [Changed]
+  - Command line arguments have been reworked. They now all have default
+    values and can be set using getopt. This definitely is backwards
+    incompatible.
+
+v16.06  2016-06-26
+  [Changed]
+  - Try to detect duplicated/cloned monitors.
+
+v16.03  2016-03-13
+  [Fixed]
+  - Overlong bars no longer appear partially on the wrong monitor.
+
+  [Changed]
+  - "Inter segment spacing" is now "segment margin": Around a segment,
+    there is both a horizontal and a vertical margin.
+  - Both the size of the (new) segment margin and the size of empty
+    segments are now measured in pixels (instead of depending on the
+    font size).
+
+v16.02  2016-02-01
+  [Added]
+  - Initial release.
+  - Draw bars.
+  - Manpage.
